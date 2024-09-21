@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>AWT Cinnamon</title>
+      <title>Log in - AWT Cinnamon</title>
       <link rel="icon" href="style/Images/logo-color.png" type="image/png">
       <link rel="stylesheet" href="style/login.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
@@ -13,14 +13,13 @@
       
       <div id="id01" class="modal">
          <div class="modal-content">
-            <h1>Log In</h1>
+            <h1>Login</h1>
             
             <form id="login" onsubmit="validateLogin">
-               <label for="username">Username:</label>
-               <input type="text" placeholder="Enter Username" id="username" name="username" required>
-               <span id="usernameError" class="error"></span><br>
+               <!-- Changed input from username to email -->
+               <input type="email" placeholder="Enter Email" id="email" name="email" required>
+               <span id="emailError" class="error"></span><br>
 
-               <label for="password">Password:</label>
                <input type="password" placeholder="Enter Password" id="password" name="password" required>
                <span id="loginPasswordError" class="error"></span><br>
 

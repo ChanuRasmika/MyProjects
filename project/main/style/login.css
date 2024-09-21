@@ -1,41 +1,10 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-}
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2; 
 
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-.error {
-    color: red;
-    font-size: 12px;
-}
-
-button {
-    background-color: #cab06e;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
 
 .modal {
     position: fixed;
@@ -45,26 +14,79 @@ button:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.4); 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+
 .modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 30%;
-    min-width: 300px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%; 
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     animation: showModal 0.4s;
+    text-align: center; 
 }
 
-@keyframes showModal {
-    from {opacity: 0;}
-    to {opacity: 1;}
+
+input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    box-sizing: border-box;
+    font-size: 14px;
 }
+
+
+button {
+    background-color: #cab06e;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336; 
+    color: white;
+    border-radius: 4px; 
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cancelbtn:hover {
+    background-color: #e53935; 
+}
+
+
+label {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
 
 .extra-options {
     display: flex;
@@ -75,4 +97,21 @@ button:hover {
 
 .extra-options .psw {
     padding-top: 12px;
+}
+
+.extra-options a {
+    color: #6a1b9a; 
+    text-decoration: none;
+}
+
+.extra-options a:hover {
+    text-decoration: underline;
+}
+
+
+@keyframes showModal {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 }

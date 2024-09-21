@@ -37,7 +37,7 @@ body {
 
 .navbar {
   width: 150%;
-  background-color: #eabe91fe;
+  background-color: #c8b791fe;
   overflow: auto;
 }
 
@@ -61,7 +61,7 @@ body {
 }
 
 button {
-  background-color: #eca965;
+  background-color: #c8b791fe;
   color: rgb(1, 1, 1);
   font-size: 15px;
   font-weight: bold;
