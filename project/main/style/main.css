@@ -1,78 +1,159 @@
-body {
-  
-  background-color: #e7d7c7;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url('Images/Sback.jpg');
 
-  height: 100%;
+body {
+  background-color: #f4ece4; 
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: left; 
+  font-family: 'Rubik', sans-serif;
+  color: #333;
 }
 
 
 .container {
-  position: absolute;
-  top: 45%;
-  left: 35%;
-  margin-bottom: 48%;
-  transform: translate(-50%, -50%);
-  font-family: Spectral, serif;
-  font-weight: bold;
-  font-size: 46px;
-  color: rgb(10, 10, 9);
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 60%;
+  margin: 5% auto;
+  font-family: 'Spectral', serif;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #704214; 
+  margin-bottom: 15px;
 }
 
 .description {
-  font-family: Rubik, sans-serif;
-  font-size: 16px;
-  color: rgb(0, 0, 0);
-  margin-top: -3%;
-  margin-right: 30%;
+  font-family: 'Rubik', sans-serif;
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
- 
+
+
+button.orderbtn {
+  background-color: #a0522d; 
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.orderbtn:hover {
+  background-color: #8b4513; 
+}
+
 
 .navbar {
-  width: 150%;
-  background-color: #c8b791fe;
+  width: 100%;
+  background-color: #d1b593;
   overflow: auto;
+  padding: 10px 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .navbar a {
-
   float: left;
+  padding: 14px 20px;
   text-align: center;
-  padding: 12px;
-  color: rgb(31, 28, 28);
+  color: #333;
   text-decoration: none;
-  font-size: 18px;
-
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .navbar a:hover {
-  background-color: #56545161;
+  background-color: #a0522d;
+  color: white;
 }
+
 .navbar a.split {
   float: right;
-  color:  rgb(27, 26, 26);
 }
 
-button {
-  background-color: #c8b791fe;
-  color: rgb(1, 1, 1);
-  font-size: 15px;
-  font-weight: bold;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 50%;
-  opacity: 0.9;
+
+.navbar a i {
+  margin-right: 8px;
 }
 
-button:hover {
-  opacity:1;
+.footer {
+  background-color: #704214; 
+  color: white;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  font-size: 14px;
+  margin-top: 40px; 
+}
+
+
+@media screen and (max-width: 768px) {
+  .container {
+      padding: 20px;
+      font-size: 18px;
+  }
+
+  .navbar a {
+      float: none;
+      display: block;
+      text-align: left;
+      padding: 10px;
+  }
+
+  button.orderbtn {
+      width: 100%;
+  }
+}
+
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 40px;
+  margin: 40px 0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+  width: 15%;
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 50px;
+  color: #ff8c00; 
+  margin-bottom: 15px;
+}
+
+.feature-item h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  font-size: 14px;
+  color: #666;
 }

@@ -1,119 +1,132 @@
+
 body {
-  background-color: #e7ded4;
   font-family: Arial, Helvetica, sans-serif;
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-} 
-
-.container {
-  margin-top: auto;
-  width: 100%;
-  max-width: 400px; /* Optional: to control the width of the form */
-  padding: 0 20px;
-  font-family: serif;
-  font-size: 17px;
-  color: rgb(55, 55, 52);
-  text-align: center;
+  background-color: #f2f2f2;
 }
 
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
 
 h1 {
+  font-size: 30px;
+  font-family: 'Sofia', sans-serif; 
   text-align: center;
   margin-bottom: 20px;
 }
 
-h6 {
-text-align: center;
-margin-bottom: 20px;
-margin-top: 5px;
-font-size: 15px;
+p {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-textarea {
-width: 100%;
-padding: 15px;
-margin: 5px 0 22px 0;
-display: inline-block;
-border: none;
-background: #f1f1f1
-}
 
-.error {
-color: red;
-font-size: 12px;
-}
-
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
-background-color: #ddd;
-outline: none;
-}
-
-hr {
-border: 4px solid #f1f1f1;
-margin-bottom: 25px;
+input[type=text], input[type=password], input[type=email] {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
 }
 
 
 button {
-background-color: #eca965;
-color: white;
-padding: 14px 20px;
-margin: 8px 0;
-border: none;
-cursor: pointer;
-width: 100%;
-opacity: 0.9;
+  background-color: #705206;
+  color: white;
+  padding: 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
 }
 
 button:hover {
-opacity:1;
+  opacity: 0.9;
 }
 
-.cancelbtn {
-padding: 14px 20px;
-background-color: #f44336;
-}
 
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
 
 .cancelbtn, .signupbtn {
-float: left;
-width: 100%;
+  width: 48%; 
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.clearfix::after {
-content: "";
-clear: both;
-display: table;
+
+.cancelbtn {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancelbtn:hover {
+  background-color: #e53935;
 }
 
 
-
-h6.a {
-  margin-left: auto;
-  margin-bottom: 10px;
-  font-size: 15px;
-  color: #333; /* Ensure text color is visible */
+.signupbtn {
+  background-color: #704214; 
+  color: white;
 }
 
-h6.a a {
-  color: dodgerblue; /* Ensure the link is visible */
-  text-decoration: none; /* Optional: Remove underline */
+.signupbtn:hover {
+  background-color: #9c9042;
 }
 
-h6.a a:hover {
-  text-decoration: underline; /* Optional: Add underline on hover */
+
+a {
+  color: dodgerblue;
+  text-decoration: none;
 }
 
-p {
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: #333; /* Ensure paragraph text is visible */
+a:hover {
+  text-decoration: underline;
+}
+
+
+#error-message {
+  text-align: center;
+  margin-top: 10px;
+  color: red;
+  font-size: 12px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+  
+  
+  .button-container {
+    flex-direction: column;
+  }
+
+  .cancelbtn, .signupbtn {
+    width: 100%; 
+    margin: 5px 0;
+  }
 }
