@@ -1,0 +1,79 @@
+body {
+    font-family: 'Rubik', sans-serif;
+    background-color: #f4ece4; /* Keeps the soft background color */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #d1b593;
+    overflow: auto;
+    padding: 10px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.navbar a {
+    float: left;
+    padding: 14px 20px;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    background-color: #a0522d;
+    color: white;
+}
+
+.navbar a.split {
+    float: right;
+}
+
+.about-section {
+    margin: 150px auto 50px auto;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.about-section h1 {
+    font-family: 'Spectral', serif;
+    font-size: 3em;
+    color: #333;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+
+.footer {
+    background-color: #704214; 
+    color: white; 
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 40px; 
+    bottom: 0;
+    flex-shrink: 0;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.footer p {
+    margin: 5px 0; 
+    line-height: 1.5; 
+}
