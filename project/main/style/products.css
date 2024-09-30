@@ -1,0 +1,252 @@
+html, body{
+    height: 100%;
+    margin: 0;
+}
+body {
+    background-color: #f4ece4; 
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    color: #333;
+}
+
+
+button.orderbtn {
+    background-color: #a0522d; 
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.orderbtn:hover {
+    background-color: #8b4513; 
+}
+
+
+.navbar {
+    width: 100%;
+    background-color: #d1b593;
+    padding: 10px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; 
+}
+
+.navbar a {
+    padding: 10px 15px; 
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: background-color 0.3 ease;
+}
+
+.navbar a:hover {
+    background-color: #a0522d;
+    color: white;
+}
+
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%; 
+    max-width: 600px;
+    flex-grow: 1;
+}
+
+.search-container input[type="text"] {
+    padding: 8px 12px; 
+    font-size: 17px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.search-container button {
+    padding: 8px 12px; 
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-container button:hover {
+    background: #ccc;
+}
+
+
+.container {
+    background-color: #ffffff;
+    padding: 70px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 1200px;
+    margin: 5% auto;
+    font-family: 'Spectral', serif;
+}
+
+.title{
+    text-align: center;
+    margin-top: -30px;
+    color: #704214; 
+    font-size: 48px;
+}
+
+
+.product-grid {
+    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 10px; /* Space between the product boxes */
+    justify-items: center;
+}
+
+.product-box {
+    background-color: #f4ece4;
+    border: 0.5px solid #ccc;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Spectral', serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #704214; 
+    text-align: center;
+    width: 200px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* align items to the top */
+    align-self: center;
+}
+
+.product-box img {
+    max-width: 100%; /* Ensures the image fits within the box */
+    height: 150px;
+    width: 150px; /* Keeps the aspect ratio of the image */
+    margin-top: 0px; /* Adds some spacing between the text and image */
+    align-self: center;
+}
+.button-container {
+    margin-top: 80px; /* Add space between image and buttons */
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+}
+
+button.buy-now {
+    background-color: #a0522d; /* Button color */
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 50px; /* Ensure buttons are side by side */
+}
+
+button.buy-now:hover, button.add-to-cart:hover {
+    background-color: #8b4513; /* Darken button on hover */
+}
+button.add-to-cart {
+    background-color: #a0522d; /* Button color */
+    color: white;
+    font-size: 14px; /* Smaller font size */
+    padding: 8px 15px; /* Smaller padding */
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 40px; /* Decrease width for icon button */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+button.add-to-cart i {
+    font-size: 16px; /* Adjust icon size accordingly */
+}
+
+button.add-to-cart:hover {
+    background-color: #8b4513; /* Darken button on hover */
+}
+
+button.buy-now {
+    width: calc(100% - 80px); /* Ensures 'Buy Now' takes more space than 'Add to Cart' */
+}
+
+/* Optional: Adjust button layout for small screens */
+@media screen and (max-width: 768px) {
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+    }
+
+    button.buy-now, button.add-to-cart {
+        width: 100%; /* Full width buttons on smaller screens */
+    }
+}
+/* Optional: Adjust button layout for small screens */
+@media screen and (max-width: 768px) {
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+    }
+
+    button.buy-now, button.add-to-cart {
+        width: 100%; /* Full width buttons on smaller screens */
+    }
+}
+.footer {
+    background-color: #704214; 
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 40px; 
+    bottom: 0;
+    flex-shrink: 0;
+  }
+  
+@media screen and (max-width: 768px) {
+    .navbar-center {
+        flex-direction: column;
+    }
+
+    button.orderbtn {
+        width: 100%;
+    }
+
+    .search-container {
+        width: 100%;
+        max-width: none;
+    }
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 boxes per row for smaller screens */
+    }
+}
+@media screen and (max-width: 500px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* 1 box per row for very small screens */
+    }
+}
+

@@ -1,7 +1,12 @@
+html, body{
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 
 body {
   background-color: #f4ece4; 
-  margin: 0;
   font-family: 'Rubik', sans-serif;
   color: #333;
 }
@@ -16,6 +21,7 @@ body {
   max-width: 60%;
   margin: 5% auto;
   font-family: 'Spectral', serif;
+  flex-grow: 1;
 }
 
 .title {
@@ -95,6 +101,8 @@ button.orderbtn:hover {
   width: 100%;
   font-size: 14px;
   margin-top: 40px; 
+  bottom: 0;
+  flex-shrink: 0;
 }
 
 
