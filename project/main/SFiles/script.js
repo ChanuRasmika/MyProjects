@@ -79,3 +79,18 @@ function validateLogin(){
 
     return true;
 }
+
+// Product filtering function
+function filterProducts() {
+    const searchInput = document.getElementById('search').value.toLowerCase();
+    const productBoxes = document.querySelectorAll('.product-box');
+    
+    productBoxes.forEach(box => {
+        const productName = box.getAttribute('data-name').toLowerCase();
+        if (productName.includes(searchInput)) {
+            box.classList.remove('hidden');
+        } else {
+            box.classList.add('hidden');
+        }
+    });
+}

@@ -128,30 +128,61 @@ button.orderbtn:hover {
     font-family: 'Spectral', serif;
     font-size: 20px;
     font-weight: bold;
-    color: #704214; 
+    color: #704214;
     text-align: center;
     width: 200px;
-    height: 300px;
+    height: auto; /* Let height adjust based on content */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* align items to the top */
+    justify-content: flex-start; /* Align items to the top */
     align-self: center;
 }
 
 .product-box img {
-    max-width: 100%; /* Ensures the image fits within the box */
+    max-width: 100%;
     height: 150px;
-    width: 150px; /* Keeps the aspect ratio of the image */
-    margin-top: 0px; /* Adds some spacing between the text and image */
+    width: 150px;
+    margin-top: 0px;
     align-self: center;
 }
+
 .button-container {
-    margin-top: 80px; /* Add space between image and buttons */
+    margin-top: 10px; /* Adjust space between specs and buttons */
     display: flex;
     justify-content: center;
-    gap: 2px;
+    gap: 5px;
 }
 
+.product-specs {
+    margin-top: 10px; /* Space between image and specs */
+    font-size: 12px; /* Smaller font size for specs */
+    color: #555; /* Lighten the color for the specs */
+    text-align: center; /* Center the text */
+}
+
+.product-specs p {
+    margin: 5px 0; /* Add some margin to each spec line */
+}
+.product-price {
+    font-size: 24px; /* Larger font size for emphasis */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Text color to contrast with background */
+    background: linear-gradient(45deg, #f4e2d8, #c39465); /* Gold gradient background */
+    padding: 10px 20px; /* Add padding for space inside */
+    border-radius: 8px; /* Rounded corners for style */
+    display: inline-block; /* Ensure padding and background work correctly */
+    margin-top: 10px; /* Space above the price */
+}
+.product-specs p {
+    margin: 5px 0; /* Space between specs */
+    text-align: center;
+}
+
+.product-specs {
+    font-size: 14px; /* Font size for product specifications */
+    color: #555; /* Grey color for less emphasis than the price */
+    text-align: center;
+}
 button.buy-now {
     background-color: #a0522d; /* Button color */
     color: white;
