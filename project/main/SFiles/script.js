@@ -124,7 +124,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
 
     try {
         // Send data to the server
-        const response = await fetch('http://localhost:8080/customer', {
+        const response = await fetch('http://localhost:8080/customer/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -148,26 +148,6 @@ document.getElementById('signupForm').addEventListener('submit', async function(
 });
 
 
-
-
-
-function validateLogin(){
-
-    const username = document.getElementById('userName').value.trim();
-    const password = document.getElementById('password').value.trim();
-
-    const errorMessageDiv = document.getElementById('error-message');
-    errorMessageDiv.textContent = '';  // Clear any previous error messages
-
-    // Check if any field is empty
-    if (username === '' || password === '') {
-        errorMessageDiv.textContent = 'All fields are required.';
-        return false;
-    }
-
-    return true;
-}
-
 // Product filtering function
 function filterProducts() {
     const searchInput = document.getElementById('search').value.toLowerCase();
@@ -182,3 +162,8 @@ function filterProducts() {
         }
     });
 }
+
+
+
+
+
