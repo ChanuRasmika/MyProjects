@@ -7,24 +7,9 @@ body {
     margin: 0;
     font-family: 'Rubik', sans-serif;
     color: #333;
+    padding: 10px;
 }
 
-
-button.orderbtn {
-    background-color: #a0522d; 
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 14px 40px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button.orderbtn:hover {
-    background-color: #8b4513; 
-}
 
 
 .navbar {
@@ -109,7 +94,17 @@ button.orderbtn:hover {
     color: #704214; 
     font-size: 48px;
 }
-
+.diameter-box {
+    border: 1px solid black;
+    padding: 5px;
+    display: inline-block;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.hidden {
+    display: none; /* Hide products that don't match the search */
+}
 
 .product-grid {
     
@@ -117,6 +112,7 @@ button.orderbtn:hover {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px 10px; /* Space between the product boxes */
     justify-items: center;
+    padding: 20px;
 }
 
 .product-box {
@@ -125,7 +121,7 @@ button.orderbtn:hover {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Spectral', serif;
+    font-family: 'Playfair Displayl', serif;
     font-size: 20px;
     font-weight: bold;
     color: #704214;
@@ -183,7 +179,7 @@ button.orderbtn:hover {
     color: #555; /* Grey color for less emphasis than the price */
     text-align: center;
 }
-button.buy-now {
+button.buy-now,button.add-to-cart {
     background-color: #a0522d; /* Button color */
     color: white;
     font-size: 10px;
@@ -192,26 +188,16 @@ button.buy-now {
     border: none;
     border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
     width: 50px; /* Ensure buttons are side by side */
+    justify-content: center;
+    text-align: center;
 }
 
 button.buy-now:hover, button.add-to-cart:hover {
-    background-color: #8b4513; /* Darken button on hover */
-}
-button.add-to-cart {
-    background-color: #a0522d; /* Button color */
-    color: white;
-    font-size: 14px; /* Smaller font size */
-    padding: 8px 15px; /* Smaller padding */
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 40px; /* Decrease width for icon button */
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    background-color: #8b4513; /* Darken the background */
+    transform: scale(1.05); /* Slightly enlarge the button */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
 }
 
 button.add-to-cart i {
@@ -278,6 +264,18 @@ button.buy-now {
 @media screen and (max-width: 500px) {
     .product-grid {
         grid-template-columns: 1fr; /* 1 box per row for very small screens */
+    }
+    .title {
+        font-size: 32px;
+    }
+
+    .product-box {
+        width: 90%; /* Adjust width to ensure it fits better */
+    }
+
+    button.buy-now, button.add-to-cart {
+        padding: 6px;
+        font-size: 12px; /* Smaller font size on smaller screens */
     }
 }
 
