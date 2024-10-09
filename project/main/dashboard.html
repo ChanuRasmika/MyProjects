@@ -3,41 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - AWT Cinnamon Traders</title>
     <link rel="stylesheet" href="style/dashboard.css">
-   
 </head>
 <body>
-    <!-- Sidebar -->
     <div class="sidebar">
         <ul>
             <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#products">Manage Products</a></li>
             <li><a href="#orders">Manage Orders</a></li>
             <li><a href="#users">Manage Users</a></li>
-            <li><a href="#settings">Settings</a></li>
         </ul>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
-        <!-- Header -->
         <div class="header">
             <div class="user-profile">Welcome, Admin</div>
             <button class="logout">Logout</button>
         </div>
 
-        <!-- Dashboard Overview -->
         <section id="dashboard">
             <h2>Admin Dashboard</h2>
             <div class="dashboard-overview">
-                <div class="stat-card">Total Products: 50</div>
-                <div class="stat-card">Total Orders: 120</div>
-                <div class="stat-card">Total Users: 200​</div>
+                <div class="stat-card">Total Products: <span id="product-count">50</span></div>
+                <div class="stat-card">Total Orders: <span id="order-count">120</span></div>
+                <div class="stat-card">Total Users: <span id="user-count">200</span></div>
             </div>
         </section>
 
-        <!-- Manage Products Section -->
         <section id="products">
             <h2>Manage Products</h2>
             <table>
@@ -51,22 +44,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Sample Product 1</td>
-                        <td>$10.00</td>
-                        <td>100</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Add more products as needed -->
+                    <!-- Data will be dynamically loaded -->
                 </tbody>
             </table>
         </section>
 
-        <!-- Manage Orders Section -->
         <section id="orders">
             <h2>Manage Orders</h2>
             <table>
@@ -80,22 +62,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1001</td>
-                        <td>John Doe</td>
-                        <td>$120.00</td>
-                        <td>Shipped</td>
-                        <td>
-                            <button>View</button>
-                            <button>Update</button>
-                        </td>
-                    </tr>
-                    <!-- Add more orders as needed -->
+                    <!-- Data will be dynamically loaded -->
                 </tbody>
             </table>
         </section>
 
-        <!-- Manage Users Section -->
         <section id="users">
             <h2>Manage Users</h2>
             <table>
@@ -109,25 +80,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>101</td>
-                        <td>Jane Smith</td>
-                        <td>jane@example.com</td>
-                        <td>Admin</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Add more users as needed -->
+                    <!-- Data will be dynamically loaded -->
                 </tbody>
             </table>
-        </section>
-
-        <!-- Settings Section -->
-        <section id="settings">
-            <h2>Settings</h2>
-            <p>Admin can adjust settings here...</p>
         </section>
     </div>
 </body>
