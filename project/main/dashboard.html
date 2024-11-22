@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="style/Images/logo-color.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - AWT Cinnamon Traders</title>
     <link rel="stylesheet" href="style/dashboard.css">
@@ -9,17 +10,18 @@
 <body>
     <div class="sidebar">
         <ul>
-            <li><a href="#dashboard">Dashboard</a></li>
-            <li><a href="#products">Manage Products</a></li>
-            <li><a href="#orders">Manage Orders</a></li>
-            <li><a href="#users">Manage Users</a></li>
+            <li><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#products"><i class="fas fa-box"></i> Manage Products</a></li>
+            <li><a href="#orders"><i class="fas fa-shopping-cart"></i> Manage Orders</a></li>
+            <li><a href="#users"><i class="fas fa-users"></i> Manage Users</a></li>
+
         </ul>
     </div>
 
     <div class="main-content">
         <div class="header">
             <div class="user-profile">Welcome, Admin</div>
-            <button class="logout">Logout</button>
+            <button class="logout" id="logoutBtn">Logout</button>
         </div>
 
         <section id="dashboard">
@@ -85,5 +87,6 @@
             </table>
         </section>
     </div>
+    <script src="SFiles/dasscript.js"></script>
 </body>
 </html>

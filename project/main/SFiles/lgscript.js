@@ -6,6 +6,7 @@ function goToLoginPage() {
     window.location.href = "signup.html"; 
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault();  // Prevent the default form submission
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.role === 'ADMIN') {
                 window.location.href = 'dashboard.html'; 
             } else {
-                window.location.href = 'products.html'; 
+                window.location.href = 'index1.html'; 
             }
         })
         .catch(error => {
