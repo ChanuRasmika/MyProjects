@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+    <link rel="stylesheet" href="style/user.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Customer Details</h2>
+        <div id="details"></div>
+        <button onclick="window.location.href='index1.html'">Back</button>
+    </div>
+
+    <script>
+        // Retrieve and display customer details
+        document.addEventListener('DOMContentLoaded', () => {
+            const customerDetails = JSON.parse(localStorage.getItem('customerDetails'));
+            const detailsDiv = document.getElementById('details');
+
+            if (customerDetails) {
+                detailsDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${customerDetails.firstName} ${customerDetails.lastName}</p>
+                    <p><strong>Username:</strong> ${customerDetails.userName}</p>
+                    <p><strong>Email:</strong> ${customerDetails.email}</p>
+                    <p><strong>Address:</strong> ${customerDetails.address}</p>
+                `;
+                // Clear the stored details
+                localStorage.removeItem('customerDetails');
+            } else {
+                detailsDiv.innerHTML = '<p>No customer details found.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

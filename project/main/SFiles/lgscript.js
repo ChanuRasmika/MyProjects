@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Determine the URL based on the email
-        let loginUrl = email === 'admin@example.com' ? 'http://localhost:8080/admin/login' : 'http://localhost:8080/login';
+        let loginUrl = email === 'admin@example.com' ? 'http://localhost:8080/admin/login' : 'http://localhost:8080/login/log';
 
         // Send the data to the backend
         fetch(loginUrl, { 

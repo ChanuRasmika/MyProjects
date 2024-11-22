@@ -137,7 +137,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
             document.getElementById('signupForm').reset();
 
             // Redirect to the home page (index.html)
-            window.location.href = 'index.html'; // Adjust path as needed
+            window.location.href = 'index1.html'; // Adjust path as needed
         } else {
             alert('Error registering customer. Please try again.');
         }
