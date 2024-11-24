@@ -9,7 +9,12 @@ html, body{
     background-color: #f4ece4; 
     font-family: 'Rubik', sans-serif;
     color: #333;
+    padding-top: 60px;
   }
+
+  .main-content {
+    padding-top: 60px; /* Adjust based on navbar height */
+}
   
   .container {
     background-color: #ffffff;
@@ -63,7 +68,7 @@ html, body{
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 1000;
   }
   
   .navbar a {

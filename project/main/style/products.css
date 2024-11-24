@@ -2,13 +2,14 @@ html, body{
     height: 100%;
     margin: 0;
 }
+
 body {
-    background-color: #f4ece4; 
-    margin: 0;
+    background-color: #f4ece4;
     font-family: 'Rubik', sans-serif;
     color: #333;
-    padding: 10px;
-}
+    margin: 0; 
+    padding: 0; 
+  }
 
 
 
@@ -232,16 +233,20 @@ button.buy-now {
         width: 100%; /* Full width buttons on smaller screens */
     }
 }
+
 .footer {
     background-color: #704214; 
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 20px 0;
     width: 100%;
     font-size: 14px;
-    margin-top: 40px; 
+    margin: 0; 
     bottom: 0;
     flex-shrink: 0;
+    box-sizing: border-box;
+    position: relative;
+    left: 0;
   }
   
 @media screen and (max-width: 768px) {
