@@ -133,13 +133,21 @@ document.getElementById('signupForm').addEventListener('submit', async function(
         });
 
         if (response.ok) {
+            // Get the response message from the backend
+            const message = await response.text(); // Assuming the backend returns plain text
+
+            // Display the message to the user
+            alert(message); // You can replace this with a custom message display element if needed
+
             // Optionally, clear the form
             document.getElementById('signupForm').reset();
 
             // Redirect to the home page (index.html)
             window.location.href = 'index1.html'; // Adjust path as needed
         } else {
-            alert('Error registering customer. Please try again.');
+            // Get the error message from the response
+            const errorMessage = await response.text();
+            alert('Error: ' + errorMessage);
         }
     } catch (error) {
         console.error('Error:', error);
