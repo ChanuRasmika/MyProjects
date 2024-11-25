@@ -7,23 +7,15 @@
     <title>Admin Dashboard - AWT Cinnamon Traders</title>
     <link rel="stylesheet" href="style/dashboard.css">
 </head>
-<body>
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-        <a href="#about" class="split">About</a>
-      </div>
+<body>   
     
-    <!-- Sidebar -->
-   
     <div class="sidebar">
         <ul>
             <li><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li><a href="#products"><i class="fas fa-box"></i> Manage Products</a></li>
             <li><a href="#orders"><i class="fas fa-shopping-cart"></i> Manage Orders</a></li>
             <li><a href="#users"><i class="fas fa-users"></i> Manage Users</a></li>
-
+            <li><a href="#users"><i class="fas fa-users"></i> Manage Deliveries</a></li>
         </ul>
     </div>
 
@@ -36,9 +28,18 @@
         <section id="dashboard">
             <h2>Admin Dashboard</h2>
             <div class="dashboard-overview">
-                <div class="stat-card">Total Products: <span id="product-count">50</span></div>
-                <div class="stat-card">Total Orders: <span id="order-count">120</span></div>
-                <div class="stat-card">Total Users: <span id="user-count">200</span></div>
+                <div class="stat-card">
+                    <span class="card-title">Total Products</span>
+                    <span id="product-count">50</span>
+                </div>
+                <div class="stat-card">
+                    <span class="card-title">Total Orders</span>
+                    <span id="order-count">120</span>
+                </div>
+                <div class="stat-card">
+                    <span class="card-title">Total Users</span>
+                    <span id="user-count">200</span>
+                </div>
             </div>
         </section>
 
@@ -60,66 +61,61 @@
             </table>
         </section>
 
-    <section id="orders">
-    <h2>Manage Orders</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Customer ID</th> <!-- New column for customer ID -->
-                <th>Description</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data will be dynamically loaded -->
-        </tbody>
-    </table>
-   </section>
+        <section id="orders">
+            <h2>Manage Orders</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer ID</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be dynamically loaded -->
+                </tbody>
+            </table>
+        </section>
 
-   
+        <h2>Delivery List <button id="addDeliveryBtn"> Add a Delivery</button></h2>
+        <table id="deliveryTable">
+            <thead>
+                <tr>
+                    <th>Delivery ID</th>
+                    <th>Order</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="deliveryTableBody">
+                <!-- Dynamic rows will be added here -->
+            </tbody>
+        </table>
 
-   <h2>Delivery List  <button id="addDeliveryBtn"> Add a Delivery</button></h2>
-   
-   <!-- Delivery Table -->
-   <table id="deliveryTable">
-       <thead>
-           <tr>
-               <th>Delivery ID</th>
-               <th>Order</th>
-               <th>Description</th>
-               <th>Date</th>
-               <th>Status</th>
-               <th>Action</th>
-           </tr>
-       </thead>
-       <tbody id="deliveryTableBody">
-           <!-- Dynamic rows will be added here -->
-       </tbody>
-   </table>
-
-
-   <section id="users">
-    <h2>Manage Users</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>User ID</th>
-                <th>Username</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Address</th>
-            </tr>
-        </thead>
-        <tbody id="userTableBody">
-            <!-- Data will be dynamically loaded here -->
-        </tbody>
-    </table>
-    </section>
-
+        <section id="users">
+            <h2>Manage Users</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- Data will be dynamically loaded -->
+                </tbody>
+            </table>
+        </section>
     </div>
+
     <script src="SFiles/dasscript.js"></script>
 </body>
 </html>
