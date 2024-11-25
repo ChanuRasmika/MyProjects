@@ -8,161 +8,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        
-    </style>
-    <script>
-        // Function to filter products
-        function filterProducts() {
-            const searchInput = document.getElementById('search').value.toLowerCase();
-            const productBoxes = document.querySelectorAll('.product-box');
-            
-            productBoxes.forEach(box => {
-                const productName = box.getAttribute('data-name').toLowerCase();
-                if (productName.includes(searchInput)) {
-                    box.classList.remove('hidden');
-                } else {
-                    box.classList.add('hidden');
-                }
-            });
-        }
-    </script>
+    <script src="SFiles/pscript.js" defer></script>
 </head>
 
 <body>
     <div class="navbar">
         <div class="navbar-center">
-            <a href="index.html"><i class="fa fa-fw fa-home"></i> </a>
+            <a href="index.html"><i class="fa fa-fw fa-home"></i></a>
             <div class="search-container">
                 <input type="text" placeholder="Search.." id="search" oninput="filterProducts()">
                 <button type="button"><i class="fa fa-search"></i></button>
             </div>
-            <a href="cart.html"><i class="fa fa-fw fa-shopping-cart"></i> </a>
+            <a href="cart.html"><i class="fa fa-fw fa-shopping-cart"></i></a>
         </div>
     </div>
     
     <div class="container">
         <h1 class="title">Our Products</h1>
         <div class="product-grid">
-            <div class="product-box" data-name="Quillings">
-                Quillings
-                <img src="style/Images/quillings.png" alt="Quillings">
-                <div class="product-specs">
-                    <p>Chips obtained in the process of cutting and bailing cinnamon </p>
-                    <p class="product-price">LKR 1500.00</p>
-                </div>
-                <div class="button-container">
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="product-box" data-name="H3">
-                H3
-                <img src="style/Images/h32.png" alt="H3">
-                <div class="product-specs">
-                    <p><span class="diameter-box">Diameter: 38mm</span></p>
-                    <p>Carries a brown color and better fragrance </p>
-                    <p class="product-price">LKR 1800.00</p>
-                </div>
-                <div class="button-container">
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="product-box" data-name="H2">
-                H2
-                <img src="style/Images/h2.png" alt="H2">
-                <div class="product-specs">
-                    <p><span class="diameter-box">Diameter: 25mm-27mm</span></p>
-                    <p>Best selling H grade cinnamon. Contains 90% yellow color.</p>
-                    <p class="product-price">LKR 2100.00</p>                
-                </div>
-                <div class="button-container">
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="product-box" data-name="H1">
-                H1
-                <img src="style/Images/h1.png" alt="H1">
-                <div class="product-specs">
-                    <p><span class="diameter-box">Diameter: 21mm-23mm</span></p>
-                    <p>Finest and the most expensive portion of the rough cinnamon bark</p>
-                    <p class="product-price">LKR 2500.00</p>                
-                </div>
-                <div class="button-container">
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="product-box" data-name="M4">
-                M4
-                <img src="style/Images/m4.png" alt="M4">
-                <div class="product-specs">
-                    <p><span class="diameter-box">Diameter: 18mm-20mm</span></p>
-                    <p>One of the top selling cinnamon grades in local and international markets. Light brown in color</p>
-                    <p class="product-price">LKR 2800.00</p>                
-                </div>
-                <div class="button-container">
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="product-box" data-name="C5">
-                C5
-                <img src="style/Images/c5.png" alt="C5">
-                <div class="product-specs">
-                    <p><span class="diameter-box">Diameter: 7mm-9mm</span></p>
-                    <p class="product-price">LKR 3500.00</p>                
-                </div>
-                <div class="button-container">
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="product-box" data-name="C4">
-                C4
-                <img src="style/Images/c4.png" alt="C4">
-                <div class="product-specs">
-                    <p><span class="diameter-box">Diameter: 12mm-15mm</span></p>
-                    <p class="product-price">LKR 3000.00</p>                
-                </div>
-                <div class="button-container">
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="product-box" data-name="ALBA">
-                ALBA
-                <img src="style/Images/alba.png" alt="ALBA">
-                <div class="product-specs">
-                    <p><span class="diameter-box">Diameter: 6mm-7mm</span></p>
-                    <p>The number one Ceylon cinnamon grade. The smooth light-coloured inner bark of the cinnamon tree gives the best quality taste and aroma. </p>
-                    <p class="product-price">LKR 4500.00</p>                
-                </div>
-                <div class="button-container">
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">
-                        <i class="fa fa-shopping-cart"></i>
-                    </button>
-                </div>
-            </div>
+            <!-- Product items will be dynamically inserted here -->
         </div>
     </div>
+
     <div class="footer">
         <p>&copy; 2024 AWT Cinnamon Traders. All Rights Reserved.</p>
         <p>123 Cinnamon Road, Batapola, Sri Lanka | Phone: +94 77 123 4567 | Email: info@awtcinnamon.com</p>
