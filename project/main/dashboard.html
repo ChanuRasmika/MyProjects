@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - AWT Cinnamon Traders</title>
     <link rel="stylesheet" href="style/dashboard.css">
+    <link rel="stylesheet" href="style/products.css">
 </head>
 <body>
     <div class="navbar">
@@ -44,21 +45,11 @@
 
         <section id="products">
             <h2>Manage Products</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data will be dynamically loaded -->
-                </tbody>
-            </table>
+            <div class="product-grid" id="productGrid">
+                <!-- Product boxes will be dynamically loaded here -->
+            </div>
         </section>
+        
 
     <section id="orders">
     <h2>Manage Orders</h2>
