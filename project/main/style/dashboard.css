@@ -172,3 +172,71 @@ table tr:hover {
     grid-template-columns: 1fr;
   }
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+thead {
+  background-color: #f4f4f4;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 0;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.action-btn {
+  background-color: #f0ad4e;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #ec971f;
+}
