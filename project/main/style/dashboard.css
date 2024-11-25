@@ -2,14 +2,15 @@
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
   display: flex;
   font-family: 'Poppins', sans-serif;
   color: #4A2C1A; /* Refined cinnamon-text color */
   background: #F8F4E3; /* Light beige for a clean feel */
-  display: flex;
   flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  box-sizing: border-box; /* Apply box-sizing globally */
 }
-
 
 /* Sidebar Styling */
 .sidebar {
@@ -24,6 +25,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   box-shadow: 3px 0 8px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s ease; /* For smooth transition */
 }
 
 .sidebar ul {
@@ -55,16 +57,47 @@ html, body {
   border-radius: 8px;
 }
 
+/* Adjust Sidebar for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px; /* Reduce width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 150px; /* Further reduce for very small screens */
+  }
+  .sidebar ul li a {
+    font-size: 16px; /* Adjust font size for better readability */
+  }
+}
+
 /* Main Content Styling */
 .main-content {
-  margin-left: 240px;
+  margin-left: 240px; /* Sidebar width */
   padding: 40px;
-  width: 100%;
+  width: calc(100% - 240px); /* Dynamic width for main content */
   background: #FFF;
   min-height: 100vh;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   flex-grow: 1;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 200px; /* Adjust for smaller screen sizes */
+    width: calc(100% - 200px); /* Dynamic width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    margin-left: 150px; /* Adjust for very small screens */
+    width: calc(100% - 150px); /* Dynamic width for very small screens */
+  }
 }
 
 /* Header Styling */
@@ -124,6 +157,11 @@ button.orderbtn:hover {
 }
 
 /* Table Styling */
+.table-container {
+  overflow-x: auto; /* Allows horizontal scroll if content overflows */
+  width: 100%;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -164,4 +202,21 @@ tr:hover {
 
 #addDeliveryBtn:hover {
   background-color: #704214;
+}
+
+@media (max-width: 768px) {
+  #addDeliveryBtn {
+    padding: 8px 16px; /* Adjust padding */
+    font-size: 14px; /* Adjust font size */
+  }
+}
+
+/* Prevent unnecessary overflow */
+* {
+  box-sizing: border-box;
+}
+
+/* Overflow Handling */
+body, html {
+  overflow-x: hidden; /* Ensure no horizontal scroll */
 }
