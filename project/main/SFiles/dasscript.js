@@ -201,7 +201,7 @@ function updateDeliveryStatus(deliveryId) {
 
 // Function to fetch and display products in the Manage Products section
 function loadProducts() {
-    fetch("http://localhost:8080/api/products") // Replace with your actual API URL
+    fetch("http://localhost:8080/api/products/all") // Replace with your actual API URL
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch products");
