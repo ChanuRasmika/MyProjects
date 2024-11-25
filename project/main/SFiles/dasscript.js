@@ -7,6 +7,22 @@ logoutButton.addEventListener("click", () => {
     window.location.href = "index.html"; // Replace with your desired URL
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('http://localhost:8080/api/products/count')
+        .then(response => response.json()) // Convert the response to JSON
+        .then(data => {
+            // If backend returns a plain number:
+            if (typeof data === 'number') {
+                document.getElementById('product-count').textContent = data;
+            }
+            // If backend wraps it as { count: <number> }:
+            else if (data.count !== undefined) {
+                document.getElementById('product-count').textContent = data.count;
+            }
+        })
+        .catch(error => console.error('Error fetching product count:', error));
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     // Function to fetch and display orders
     function loadOrders() {
