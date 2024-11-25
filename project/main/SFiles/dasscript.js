@@ -7,7 +7,7 @@ logoutButton.addEventListener("click", () => {
     window.location.href = "index.html"; // Replace with your desired URL
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Function to fetch and display orders
     function loadOrders() {
         fetch("http://localhost:8080/order/all") // Replace with your API URL
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     row.innerHTML = `
                         <td>${order.orderId}</td>
-                        <td>${order.customerId}</td> <!-- Display customer ID -->
+                        <td>${order.customerId}</td>
                         <td>${order.description}</td>
                         <td>${order.status}</td>
                         <td>
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     row.innerHTML = `
                         <td>${delivery.deliveryId}</td>
-                        <td>${delivery.orderId}</td>  <!-- Assuming order ID is available -->
+                        <td>${delivery.orderId}</td>
                         <td>${delivery.description}</td>
                         <td>${delivery.date}</td>
                         <td>${delivery.status}</td>
@@ -73,6 +73,41 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => {
                 console.error("Error loading deliveries:", error);
             });
+    }
+
+    // Function to add a new delivery
+    function addDelivery() {
+        const orderId = prompt("Enter Order ID:");
+        const description = prompt("Enter Delivery Description:");
+        const date = prompt("Enter Delivery Date (YYYY-MM-DD):");
+        const status = prompt("Enter Delivery Status:");
+
+        if (orderId && description && date && status) {
+            const deliveryData = { orderId, description, date, status };
+
+            fetch("http://localhost:8080/api/deliveries/add", { // Replace with your API endpoint
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(deliveryData),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to add delivery");
+                    }
+                    return response.json();
+                })
+                .then(newDelivery => {
+                    alert("Delivery added successfully!");
+                    loadDeliveries(); // Reload deliveries after adding
+                })
+                .catch(error => {
+                    console.error("Error adding delivery:", error);
+                });
+        } else {
+            alert("All fields are required!");
+        }
     }
 
     // Load orders and deliveries when the page loads
@@ -103,6 +138,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => {
             console.error("Error fetching users:", error);
         });
+
+    // Expose addDelivery globally (for button calls)
+    window.addDelivery = addDelivery;
 });
 
 // Function to handle updating the order status
@@ -113,14 +151,14 @@ function updateOrderStatus(orderId) {
         fetch(`http://localhost:8080/order/update-status?orderId=${orderId}&status=${newStatus}`, {
             method: "PUT",
         })
-        .then(response => response.json())
-        .then(updatedOrder => {
-            alert("Order status updated successfully!");
-            loadOrders();  // Reload the orders after updating
-        })
-        .catch(error => {
-            console.error("Error updating order status:", error);
-        });
+            .then(response => response.json())
+            .then(updatedOrder => {
+                alert("Order status updated successfully!");
+                loadOrders();  // Reload the orders after updating
+            })
+            .catch(error => {
+                console.error("Error updating order status:", error);
+            });
     }
 }
 
@@ -132,13 +170,13 @@ function updateDeliveryStatus(deliveryId) {
         fetch(`http://localhost:8080/api/deliveries/update-status?deliveryId=${deliveryId}&status=${newStatus}`, {
             method: "PUT",
         })
-        .then(response => response.json())
-        .then(updatedDelivery => {
-            alert("Delivery status updated successfully!");
-            loadDeliveries();  // Reload the deliveries after updating
-        })
-        .catch(error => {
-            console.error("Error updating delivery status:", error);
-        });
+            .then(response => response.json())
+            .then(updatedDelivery => {
+                alert("Delivery status updated successfully!");
+                loadDeliveries();  // Reload the deliveries after updating
+            })
+            .catch(error => {
+                console.error("Error updating delivery status:", error);
+            });
     }
 }
