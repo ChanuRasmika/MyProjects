@@ -180,3 +180,93 @@ function updateDeliveryStatus(deliveryId) {
             });
     }
 }
+
+// Function to fetch and display products in the Manage Products section
+function loadProducts() {
+    fetch("http://localhost:8080/api/products") // Replace with your actual API URL
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch products");
+            }
+            return response.json();
+        })
+        .then(products => {
+            const productGrid = document.getElementById("productGrid"); // Ensure this matches your HTML
+            productGrid.innerHTML = ""; // Clear existing product boxes
+
+            products.forEach(product => {
+                const productBox = document.createElement("div");
+                productBox.classList.add("product-box");
+
+                productBox.innerHTML = `
+                    <img src="${product.imageUrl}" alt="${product.productName}" class="product-image">
+                    <div class="product-info">
+                        <h3>${product.productName}</h3>
+                        <p>${product.description}</p>
+                        <p>Price: LKR ${product.price}</p>
+                        <p>Stock: ${product.stockAvailability ? 'Available' : 'Out of stock'}</p>
+                        <div class="button-container">
+                            <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete Product</button>
+                             <button class="update-btn" onclick="updateProduct(${product.id}, '${product.price}')">Update</button>
+                        </div>
+                    </div>
+                `;
+                productGrid.appendChild(productBox);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading products:", error);
+        });
+}
+
+// Call loadProducts when the page loads
+loadProducts();
+
+function deleteProduct(productId) {
+    const confirmation = confirm("Are you sure you want to delete this product?");
+    if (confirmation) {
+        fetch(`http://localhost:8080/products/delete/${productId}`, {
+            method: "DELETE",
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Product deleted successfully!");
+                loadProducts(); // Reload the products after deletion
+            } else {
+                alert("Failed to delete product.");
+            }
+        })
+        .catch(error => {
+            console.error("Error deleting product:", error);
+        });
+    }
+}
+
+function updateProduct(productId, currentPrice) {
+    const newPrice = prompt("Enter the new price for this product:", currentPrice);
+
+    if (newPrice && !isNaN(newPrice) && newPrice > 0) {
+        fetch(`http://localhost:8080/products/update/${productId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                price: newPrice,
+            }),
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Product price updated successfully!");
+                loadProducts(); // Reload products after the update
+            } else {
+                alert("Failed to update product price.");
+            }
+        })
+        .catch(error => {
+            console.error("Error updating product price:", error);
+        });
+    } else {
+        alert("Invalid price entered.");
+    }
+}

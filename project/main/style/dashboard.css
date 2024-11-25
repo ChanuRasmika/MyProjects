@@ -1,7 +1,8 @@
-/* General Settings */
+/* Global Styles */
 html, body {
   height: 100%;
   margin: 0;
+  display: flex;
   font-family: 'Poppins', sans-serif;
   color: #4A2C1A; /* Refined cinnamon-text color */
   background: #F8F4E3; /* Light beige for a clean feel */
@@ -66,6 +67,7 @@ html, body {
   flex-grow: 1;
 }
 
+/* Header Styling */
 .header {
   display: flex;
   justify-content: space-between;
@@ -78,19 +80,9 @@ html, body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.header .user-profile {
-  font-weight: 600;
-}
-
-.header .logout {
-  background-color: #A0522D;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* Button Hover Effects */
+button.orderbtn:hover {
+  background-color: #8b4513;
 }
 
 .header .logout:hover {
