@@ -181,6 +181,8 @@ function updateDeliveryStatus(deliveryId) {
     }
 }
 
+
+
 // Function to fetch and display products in the Manage Products section
 function loadProducts() {
     fetch("http://localhost:8080/api/products") // Replace with your actual API URL
@@ -197,6 +199,7 @@ function loadProducts() {
             products.forEach(product => {
                 const productBox = document.createElement("div");
                 productBox.classList.add("product-box");
+                productBox.id = `product-${product.id}`;  // Unique ID for each product box
 
                 productBox.innerHTML = `
                     <img src="${product.imageUrl}" alt="${product.productName}" class="product-image">
@@ -223,23 +226,25 @@ function loadProducts() {
 loadProducts();
 
 function deleteProduct(productId) {
-    const confirmation = confirm("Are you sure you want to delete this product?");
-    if (confirmation) {
-        fetch(`http://localhost:8080/products/delete/${productId}`, {
-            method: "DELETE",
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("Product deleted successfully!");
-                loadProducts(); // Reload the products after deletion
-            } else {
-                alert("Failed to delete product.");
-            }
-        })
-        .catch(error => {
-            console.error("Error deleting product:", error);
-        });
+    fetch(`http://localhost:8080/products/${productId}`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Delete Response:", data); 
+        if (data.success) {
+            alert("Product deleted successfully!"); // Success or error message from backend
+        }
+        // remove the product from the UI if it is deleted
+        const productRow = document.getElementById(`product-${productId}`);
+        if(productRow){
+        productRow.remove();
+    }else {
+        alert("Failed to delete product");
     }
+}
+)
+    .catch(error => console.error("Error deleting product:", error));
 }
 
 function updateProduct(productId, currentPrice) {
