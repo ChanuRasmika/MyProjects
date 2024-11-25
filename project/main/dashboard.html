@@ -31,7 +31,7 @@
             <div class="dashboard-overview">
                 <div class="stat-card">
                     <span class="card-title">Total Products</span>
-                    <span id="product-count">50</span>
+                    <span id="product-count">Loading...</span>
                 </div>
                 <div class="stat-card">
                     <span class="card-title">Total Orders</span>
@@ -50,6 +50,39 @@
                 <!-- Product boxes will be dynamically loaded here -->
             </div>
         </section>
+
+        <div class="add-product-container">
+            <button id="addProductBtn" class="add-product-btn">Add Product</button>
+        </div>
+        
+        <!-- Adding Product -->
+        <div id="addProductModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Add Product</h2>
+                <form id="addProductForm">
+                    <label for="productName">Product Name:</label>
+                    <input type="text" id="productName" required />
+        
+                    <label for="productDescription">Description:</label>
+                    <textarea id="productDescription" required></textarea>
+        
+                    <label for="productPrice">Price (LKR):</label>
+                    <input type="number" id="productPrice" step="0.01" required />
+        
+                    <label for="productImage">Image URL:</label>
+                    <input type="text" id="productImage" required />
+        
+                    <label for="productStock">Stock Availability:</label>
+                    <select id="productStock" required>
+                        <option value="true">Available</option>
+                        <option value="false">Out of Stock</option>
+                    </select>
+        
+                    <button type="submit">Add Product</button>
+                    <button type="button" id="cancelBtn">Cancel</button>
+                </form>
+            </div>
+        </div>
         
 
         <section id="orders">
