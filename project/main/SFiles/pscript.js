@@ -1,5 +1,5 @@
 // Fetch all available products from the backend
-fetch('http://localhost:8080/api/products')
+fetch('http://localhost:8080/api/products/all')
     .then(response => response.json())
     .then(data => {
         const productGrid = document.querySelector('.product-grid');
