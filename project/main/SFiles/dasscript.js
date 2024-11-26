@@ -8,6 +8,19 @@ logoutButton.addEventListener("click", () => {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Load orders
+    loadOrders();
+
+    // Load deliveries
+    loadDeliveries();
+
+    // Load customers
+    loadCustomers();
+
+    // Expose addDelivery globally (for button calls)
+    window.addDelivery = addDelivery;
+
+    // Load product count
     fetch('http://localhost:8080/api/products/count')
         .then(response => response.json()) // Convert the response to JSON
         .then(data => {
@@ -23,19 +36,34 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error fetching product count:', error));
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Load orders
-    loadOrders();
+// Function to fetch and display customers
+function loadCustomers() {
+    fetch("http://localhost:8080/customer/all")  // Replace with your backend API endpoint
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch customers");
+            }
+            return response.json();
+        })
+        .then(customers => {
+            const customersTableBody = document.querySelector("#customers tbody");
+            customersTableBody.innerHTML = ""; // Clear existing table rows
 
-    // Load deliveries
-    loadDeliveries();
+            customers.forEach(customer => {
+                const row = document.createElement("tr");
 
-    // Load customers
-    loadCustomers();
-
-    // Expose addDelivery globally (for button calls)
-    window.addDelivery = addDelivery;
-});
+                row.innerHTML = `
+                    <td>${customer.customerId}</td>
+                    <td>${customer.firstName}</td>
+                    <td>${customer.lastName}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.username}</td>
+                `;
+                customersTableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error("Error loading customers:", error));
+}
 
 // Function to fetch and display orders
 function loadOrders() {
@@ -242,93 +270,33 @@ function showAddProductModal() {
             <h2>Add New Product</h2>
             <form id="addProductForm">
                 <label for="productName">Product Name:</label>
-                <input type="text" id="productName" required>
-
-                <label for="description">Description:</label>
-                <textarea id="description" required></textarea>
-
-                <label for="price">Price (LKR):</label>
-                <input type="number" id="price" step="0.01" required>
-
-                <label for="stockAvailability">Stock Availability:</label>
-                <select id="stockAvailability">
-                    <option value="true">Available</option>
-                    <option value="false">Out of Stock</option>
-                </select>
-
-                <label for="imageUrl">Image URL:</label>
-                <input type="text" id="imageUrl">
-
-                <button type="button" onclick="addProduct()">Add Product</button>
+                <input type="text" id="productName" name="productName" required><br><br>
+                <label for="productDescription">Product Description:</label>
+                <textarea id="productDescription" name="productDescription" required></textarea><br><br>
+                <label for="productPrice">Product Price:</label>
+                <input type="number" id="productPrice" name="productPrice" required><br><br>
+                <label for="productStock">Product Stock Availability:</label>
+                <input type="checkbox" id="productStock" name="productStock"><br><br>
+                <button type="submit">Add Product</button>
             </form>
         </div>
     </div>
     `;
+    document.body.insertAdjacentHTML("beforeend", modal);
 
-    console.log("Modal HTML created");
+    const addProductForm = document.getElementById('addProductForm');
+    addProductForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    // Create a temporary div to hold the modal
-    const modalContainer = document.createElement('div');
-    modalContainer.innerHTML = modal;
-    document.body.appendChild(modalContainer.firstChild);
+        const productName = document.getElementById('productName').value;
+        const productDescription = document.getElementById('productDescription').value;
+        const productPrice = document.getElementById('productPrice').value;
+        const productStock = document.getElementById('productStock').checked;
 
-    console.log("Modal added to body");
-}
-
-function closeAddProductModal() {
-    const modal = document.getElementById('addProductModal');
-    if (modal) {
-        modal.remove();
-    }
-}
-
-function addProduct() {
-    // Collect form data
-    const productName = document.getElementById('productName').value;
-    const description = document.getElementById('description').value;
-    const price = parseFloat(document.getElementById('price').value);
-    const stockAvailability = document.getElementById('stockAvailability').value === 'true';
-    const imageUrl = document.getElementById('imageUrl').value || ''; // Optional
-
-    // Create product object
-    const productData = {
-        productName,
-        productDescription: description,
-        price,
-        stockAvailability,
-        imageUrl
-    };
-
-    // Validate inputs
-    if (!productName || !description || isNaN(price)) {
-        alert('Please fill in all required fields');
-        return;
-    }
-
-    // Send POST request to backend
-    fetch('http://localhost:8080/api/products/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.text().then(errorText => {
-                throw new Error(errorText || 'Failed to add product');
-            });
+        if (productName && productDescription && productPrice) {
+            addProduct(productName, productDescription, productPrice, productStock);
+        } else {
+            alert("Please fill out all required fields.");
         }
-        return response.json();
-    })
-    .then(newProduct => {
-        alert('Product added successfully!');
-        closeAddProductModal();
-        loadProducts(); // Reload the products list
-    })
-    .catch(error => {
-        console.error('Error adding product:', error);
-        alert(`Failed to add product: ${error.message}`);
     });
 }
-
