@@ -203,26 +203,29 @@ function loadProducts() {
 // Call loadProducts when the page loads
 loadProducts();
 
-// Function to delete a product
 function deleteProduct(productId) {
-    fetch(`http://localhost:8080/api/products/delete?productId${productId}`, {
+    fetch(`http://localhost:8080/api/products/delete?productId=${productId}`, {
         method: 'DELETE',
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Delete Response:", data);
-        if (data.success) {
-            alert("Product deleted successfully!"); // Success or error message from backend
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorMsg => {
+                throw new Error(errorMsg);
+            });
         }
-        // remove the product from the UI if it is deleted
+        return response.text();
+    })
+    .then(message => {
         const productRow = document.getElementById(`product-${productId}`);
         if (productRow) {
             productRow.remove();
-        } else {
-            alert("Failed to delete product");
         }
+        alert(message); // "Product deleted successfully."
     })
-    .catch(error => console.error("Error deleting product:", error));
+    .catch(error => {
+        console.error("Error deleting product:", error);
+        alert(error.message || "Failed to delete product");
+    });
 }
 
 // Function to update product price
