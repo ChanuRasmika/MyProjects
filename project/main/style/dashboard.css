@@ -250,12 +250,12 @@ body, html {
   height: 300px; /* Standard product box height */
   margin: 0; /* Removed individual margins to use gap */
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 0.5px solid #ccc;
   border-radius: 10px;
   display: inline-block;
   text-align: center;
   background: #f4ece4;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
@@ -272,12 +272,12 @@ body, html {
 }
 
 #products .product-grid .product-info h3 {
-  font-size: 14px;
+  font-size: 20px;
   margin: 5px 0;
 }
 
 #products .product-grid .product-info p {
-  font-size: 12px;
+  font-size: 15px;
   margin: 3px 0;
 }
 

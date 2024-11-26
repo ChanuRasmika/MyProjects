@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p>Stock: ${product.stockAvailability ? 'Available' : 'Out of stock'}</p>
                         <div class="button-container">
                             <button class="buy-now">Buy Now</button>
-                            <button class="add-to-cart" data-id="${product.productId}">Add to Cart</button>
+                            <button class="add-to-cart" data-id="${product.productId}"><i class="fas fa-cart-plus"></i></button>
                         </div>
                     </div>
                 `;

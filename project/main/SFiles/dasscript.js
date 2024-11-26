@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error('Error fetching product count:', error));
 });
-
 // Function to fetch and display customers
 function loadCustomers() {
     fetch("http://localhost:8080/customer/all")  // Replace with your backend API endpoint
@@ -128,38 +127,83 @@ function loadDeliveries() {
         .catch(error => console.error("Error loading deliveries:", error));
 }
 
-// Function to add a new delivery
-function addDelivery() {
-    const orderId = prompt("Enter Order ID:");
-    const description = prompt("Enter Delivery Description:");
-    const date = prompt("Enter Delivery Date (YYYY-MM-DD):");
-    const status = prompt("Enter Delivery Status:");
+function showAddDeliveryModal() {
+    const modal = `
+    <div id="addDeliveryModal" class="modal show">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAddDeliveryModal()">&times;</span>
+            <h2>Add New Delivery</h2>
+            <form id="addDeliveryForm">
+                <label for="orderId">Order ID:</label>
+                <input type="number" id="orderId" name="orderId" required><br><br>
 
-    if (orderId && description && date && status) {
-        const deliveryData = { orderId, description, date, status };
+                <label for="description">Delivery Description:</label>
+                <textarea id="description" name="description" required></textarea><br><br>
 
-        fetch("http://localhost:8080/api/deliveries/add", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(deliveryData),
-        })
+                <label for="date">Delivery Date:</label>
+                <input type="date" id="date" name="date" required><br><br>
+
+                <label for="status">Delivery Status:</label>
+                <input type="text" id="status" name="status" required><br><br>
+
+                <button type="submit">Add Delivery</button>
+            </form>
+        </div>
+    </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modal);
+
+    // Event listener for form submission
+    const addDeliveryForm = document.getElementById('addDeliveryForm');
+    addDeliveryForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const orderId = document.getElementById('orderId').value;
+        const description = document.getElementById('description').value;
+        const date = document.getElementById('date').value;
+        const status = document.getElementById('status').value;
+
+        if (orderId && description && date && status) {
+            const deliveryData = {
+                orderId: orderId,
+                description: description,
+                date: date,
+                status: status
+            };
+
+            fetch('http://localhost:8080/api/deliveries/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(deliveryData),
+            })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Failed to add delivery");
+                    throw new Error('Failed to add delivery');
                 }
                 return response.json();
             })
             .then(newDelivery => {
-                alert("Delivery added successfully!");
-                loadDeliveries(); // Reload deliveries after adding
+                alert('Delivery added successfully');
+                closeAddDeliveryModal();
+                loadDeliveries(); // Reload deliveries to show the new one
             })
             .catch(error => {
-                console.error("Error adding delivery:", error);
+                console.error('Error adding delivery:', error);
+                alert('Failed to add delivery. Please try again later.');
             });
-    } else {
-        alert("All fields are required!");
+        } else {
+            alert("Please fill out all required fields.");
+        }
+    });
+}
+
+// Function to close the add delivery modal
+function closeAddDeliveryModal() {
+    const modal = document.getElementById('addDeliveryModal');
+    if (modal) {
+        modal.remove(); // Removes the modal from the DOM
     }
 }
 
@@ -189,7 +233,7 @@ function loadProducts() {
                         <p>Price: LKR ${product.price}</p>
                         <p>Stock: ${product.stockAvailability ? 'Available' : 'Out of stock'}</p>
                         <div class="button-container">
-                            <button class="delete-btn" onclick="deleteProduct(${product.productId})">Delete Product</button>
+                            <button class="delete-btn" onclick="deleteProduct(${product.productId})">Delete</button>
                             <button class="update-btn" onclick="updateProduct(${product.productId}, '${product.price}')">Update</button>
                         </div>
                     </div>
