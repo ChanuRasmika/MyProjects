@@ -53,7 +53,7 @@ function loadCustomers() {
                 const row = document.createElement("tr");
 
                 row.innerHTML = `
-                    <td>${customer.customerId}</td>
+                    <td>${customer.id}</td>
                     <td>${customer.firstName}</td>
                     <td>${customer.lastName}</td>
                     <td>${customer.email}</td>
