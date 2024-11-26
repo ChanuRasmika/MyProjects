@@ -251,8 +251,19 @@ body, html {
 .add-product-btn:hover {
   background-color: #8B4513;
 }
+.close-btn {
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #aaa;
+}
 
+.close-btn:hover {
+  color: black;
+}
 .modal {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -263,6 +274,10 @@ body, html {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+}
+
+.modal.show{
+  display: flex;
 }
 
 .modal-content {

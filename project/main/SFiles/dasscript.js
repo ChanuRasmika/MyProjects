@@ -24,184 +24,120 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Function to fetch and display orders
-    function loadOrders() {
-        fetch("http://localhost:8080/order/all") // Replace with your API URL
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch orders");
-                }
-                return response.json();
-            })
-            .then(orders => {
-                const ordersTableBody = document.querySelector("#orders tbody");
-                ordersTableBody.innerHTML = ""; // Clear existing table rows
-
-                orders.forEach(order => {
-                    const row = document.createElement("tr");
-
-                    row.innerHTML = `
-                        <td>${order.orderId}</td>
-                        <td>${order.customerId}</td>
-                        <td>${order.description}</td>
-                        <td>${order.status}</td>
-                        <td>
-                            <button class="action-btn" onclick="updateOrderStatus(${order.orderId})">Update Status</button>
-                        </td>
-                    `;
-                    ordersTableBody.appendChild(row);
-                });
-            })
-            .catch(error => {
-                console.error("Error loading orders:", error);
-            });
-    }
-
-    // Function to fetch and display deliveries
-    function loadDeliveries() {
-        fetch("http://localhost:8080/api/deliveries/all")  // Your API endpoint for fetching all deliveries
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch deliveries");
-                }
-                return response.json();
-            })
-            .then(deliveries => {
-                const deliveryTableBody = document.getElementById("deliveryTableBody");
-                deliveryTableBody.innerHTML = ""; // Clear existing table rows
-
-                deliveries.forEach(delivery => {
-                    const row = document.createElement("tr");
-
-                    row.innerHTML = `
-                        <td>${delivery.deliveryId}</td>
-                        <td>${delivery.orderId}</td>
-                        <td>${delivery.description}</td>
-                        <td>${delivery.date}</td>
-                        <td>${delivery.status}</td>
-                        <td>
-                            <button class="action-btn" onclick="updateDeliveryStatus(${delivery.deliveryId})">Update Status</button>
-                        </td>
-                    `;
-                    deliveryTableBody.appendChild(row);
-                });
-            })
-            .catch(error => {
-                console.error("Error loading deliveries:", error);
-            });
-    }
-
-    // Function to add a new delivery
-    function addDelivery() {
-        const orderId = prompt("Enter Order ID:");
-        const description = prompt("Enter Delivery Description:");
-        const date = prompt("Enter Delivery Date (YYYY-MM-DD):");
-        const status = prompt("Enter Delivery Status:");
-
-        if (orderId && description && date && status) {
-            const deliveryData = { orderId, description, date, status };
-
-            fetch("http://localhost:8080/api/deliveries/add", { // Replace with your API endpoint
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(deliveryData),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Failed to add delivery");
-                    }
-                    return response.json();
-                })
-                .then(newDelivery => {
-                    alert("Delivery added successfully!");
-                    loadDeliveries(); // Reload deliveries after adding
-                })
-                .catch(error => {
-                    console.error("Error adding delivery:", error);
-                });
-        } else {
-            alert("All fields are required!");
-        }
-    }
-
-    // Load orders and deliveries when the page loads
+    // Load orders
     loadOrders();
+
+    // Load deliveries
     loadDeliveries();
 
-    // Fetch all customers when the page loads
-    fetch('http://localhost:8080/customer/all')
-        .then(response => response.json())
-        .then(customers => {
-            const tableBody = document.getElementById("userTableBody");
-            tableBody.innerHTML = ""; // Clear any existing rows
-
-            customers.forEach(customer => {
-                const row = document.createElement("tr");
-
-                row.innerHTML = `
-                    <td>${customer.id}</td>
-                    <td>${customer.userName}</td>
-                    <td>${customer.firstName}</td>
-                    <td>${customer.lastName}</td>
-                    <td>${customer.email}</td>
-                    <td>${customer.address}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        })
-        .catch(error => {
-            console.error("Error fetching users:", error);
-        });
+    // Load customers
+    loadCustomers();
 
     // Expose addDelivery globally (for button calls)
     window.addDelivery = addDelivery;
 });
 
-// Function to handle updating the order status
-function updateOrderStatus(orderId) {
-    const newStatus = prompt("Enter new order status:");
-
-    if (newStatus) {
-        fetch(`http://localhost:8080/order/update-status?orderId=${orderId}&status=${newStatus}`, {
-            method: "PUT",
+// Function to fetch and display orders
+function loadOrders() {
+    fetch("http://localhost:8080/order/all")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch orders");
+            }
+            return response.json();
         })
-            .then(response => response.json())
-            .then(updatedOrder => {
-                alert("Order status updated successfully!");
-                loadOrders();  // Reload the orders after updating
-            })
-            .catch(error => {
-                console.error("Error updating order status:", error);
+        .then(orders => {
+            const ordersTableBody = document.querySelector("#orders tbody");
+            ordersTableBody.innerHTML = ""; // Clear existing table rows
+
+            orders.forEach(order => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${order.orderId}</td>
+                    <td>${order.customerId}</td>
+                    <td>${order.description}</td>
+                    <td>${order.status}</td>
+                    <td>
+                        <button class="action-btn" onclick="updateOrderStatus(${order.orderId})">Update Status</button>
+                    </td>
+                `;
+                ordersTableBody.appendChild(row);
             });
-    }
+        })
+        .catch(error => console.error("Error loading orders:", error));
 }
 
-// Function to handle updating the delivery status
-function updateDeliveryStatus(deliveryId) {
-    const newStatus = prompt("Enter new delivery status:");
-
-    if (newStatus) {
-        fetch(`http://localhost:8080/api/deliveries/update-status?deliveryId=${deliveryId}&status=${newStatus}`, {
-            method: "PUT",
+// Function to fetch and display deliveries
+function loadDeliveries() {
+    fetch("http://localhost:8080/api/deliveries/all")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch deliveries");
+            }
+            return response.json();
         })
-            .then(response => response.json())
-            .then(updatedDelivery => {
-                alert("Delivery status updated successfully!");
-                loadDeliveries();  // Reload the deliveries after updating
-            })
-            .catch(error => {
-                console.error("Error updating delivery status:", error);
+        .then(deliveries => {
+            const deliveryTableBody = document.getElementById("deliveryTableBody");
+            deliveryTableBody.innerHTML = ""; // Clear existing table rows
+
+            deliveries.forEach(delivery => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${delivery.deliveryId}</td>
+                    <td>${delivery.orderId}</td>
+                    <td>${delivery.description}</td>
+                    <td>${delivery.date}</td>
+                    <td>${delivery.status}</td>
+                    <td>
+                        <button class="action-btn" onclick="updateDeliveryStatus(${delivery.deliveryId})">Update Status</button>
+                    </td>
+                `;
+                deliveryTableBody.appendChild(row);
             });
-    }
+        })
+        .catch(error => console.error("Error loading deliveries:", error));
 }
 
+// Function to add a new delivery
+function addDelivery() {
+    const orderId = prompt("Enter Order ID:");
+    const description = prompt("Enter Delivery Description:");
+    const date = prompt("Enter Delivery Date (YYYY-MM-DD):");
+    const status = prompt("Enter Delivery Status:");
 
+    if (orderId && description && date && status) {
+        const deliveryData = { orderId, description, date, status };
+
+        fetch("http://localhost:8080/api/deliveries/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(deliveryData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to add delivery");
+                }
+                return response.json();
+            })
+            .then(newDelivery => {
+                alert("Delivery added successfully!");
+                loadDeliveries(); // Reload deliveries after adding
+            })
+            .catch(error => {
+                console.error("Error adding delivery:", error);
+            });
+    } else {
+        alert("All fields are required!");
+    }
+}
 
 // Function to fetch and display products in the Manage Products section
 function loadProducts() {
-    fetch("http://localhost:8080/api/products/all") // Replace with your actual API URL
+    fetch("http://localhost:8080/api/products/all")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch products");
@@ -209,13 +145,13 @@ function loadProducts() {
             return response.json();
         })
         .then(products => {
-            const productGrid = document.getElementById("productGrid"); // Ensure this matches your HTML
+            const productGrid = document.getElementById("productGrid");
             productGrid.innerHTML = ""; // Clear existing product boxes
 
             products.forEach(product => {
                 const productBox = document.createElement("div");
                 productBox.classList.add("product-box");
-                productBox.id = `product-${product.id}`;  // Unique ID for each product box
+                productBox.id = `product-${product.productId}`;
 
                 productBox.innerHTML = `
                     <img src="${product.imageUrl}" alt="${product.productName}" class="product-image">
@@ -225,69 +161,174 @@ function loadProducts() {
                         <p>Price: LKR ${product.price}</p>
                         <p>Stock: ${product.stockAvailability ? 'Available' : 'Out of stock'}</p>
                         <div class="button-container">
-                            <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete Product</button>
-                             <button class="update-btn" onclick="updateProduct(${product.id}, '${product.price}')">Update</button>
+                            <button class="delete-btn" onclick="deleteProduct(${product.productId})">Delete Product</button>
+                            <button class="update-btn" onclick="updateProduct(${product.productId}, '${product.price}')">Update</button>
                         </div>
                     </div>
                 `;
                 productGrid.appendChild(productBox);
             });
         })
-        .catch(error => {
-            console.error("Error loading products:", error);
-        });
+        .catch(error => console.error("Error loading products:", error));
 }
 
 // Call loadProducts when the page loads
 loadProducts();
 
+// Function to delete a product
 function deleteProduct(productId) {
     fetch(`http://localhost:8080/products/${productId}`, {
         method: 'DELETE',
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Delete Response:", data); 
+        console.log("Delete Response:", data);
         if (data.success) {
             alert("Product deleted successfully!"); // Success or error message from backend
         }
         // remove the product from the UI if it is deleted
         const productRow = document.getElementById(`product-${productId}`);
-        if(productRow){
-        productRow.remove();
-    }else {
-        alert("Failed to delete product");
-    }
-}
-)
+        if (productRow) {
+            productRow.remove();
+        } else {
+            alert("Failed to delete product");
+        }
+    })
     .catch(error => console.error("Error deleting product:", error));
 }
 
+// Function to update product price
 function updateProduct(productId, currentPrice) {
-    const newPrice = prompt("Enter the new price for this product:", currentPrice);
+    const newPrice = prompt(`Current Price: LKR ${currentPrice}\nEnter new price:`);
 
-    if (newPrice && !isNaN(newPrice) && newPrice > 0) {
-        fetch(`http://localhost:8080/products/update/${productId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                price: newPrice,
-            }),
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("Product price updated successfully!");
-                loadProducts(); // Reload products after the update
-            } else {
-                alert("Failed to update product price.");
-            }
-        })
-        .catch(error => {
-            console.error("Error updating product price:", error);
-        });
+    if (newPrice && !isNaN(newPrice)) {
+        updateProductPrice(productId, parseFloat(newPrice));
     } else {
-        alert("Invalid price entered.");
+        alert("Invalid price. Please enter a valid number.");
     }
 }
+
+function updateProductPrice(productId, newPrice) {
+    const url = `http://localhost:8080/api/products/update?productId=${productId}&price=${newPrice}`;
+
+    fetch(url, {
+        method: 'PUT',
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorText => {
+                throw new Error(`Failed to update product price: ${errorText}`);
+            });
+        }
+        return response.text();
+    })
+    .then(data => {
+        alert("Product price updated successfully!"); 
+        loadProducts(); 
+    })
+    .catch(error => {
+        console.error('Complete error details:', error);
+        alert('Error updating product price: ' + error.message);
+    });
+}
+
+function showAddProductModal() {
+    console.log("showAddProductModal function called");
+
+    const modal = `
+    <div id="addProductModal" class="modal show">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAddProductModal()">&times;</span>
+            <h2>Add New Product</h2>
+            <form id="addProductForm">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" required></textarea>
+
+                <label for="price">Price (LKR):</label>
+                <input type="number" id="price" step="0.01" required>
+
+                <label for="stockAvailability">Stock Availability:</label>
+                <select id="stockAvailability">
+                    <option value="true">Available</option>
+                    <option value="false">Out of Stock</option>
+                </select>
+
+                <label for="imageUrl">Image URL:</label>
+                <input type="text" id="imageUrl">
+
+                <button type="button" onclick="addProduct()">Add Product</button>
+            </form>
+        </div>
+    </div>
+    `;
+
+    console.log("Modal HTML created");
+
+    // Create a temporary div to hold the modal
+    const modalContainer = document.createElement('div');
+    modalContainer.innerHTML = modal;
+    document.body.appendChild(modalContainer.firstChild);
+
+    console.log("Modal added to body");
+}
+
+function closeAddProductModal() {
+    const modal = document.getElementById('addProductModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function addProduct() {
+    // Collect form data
+    const productName = document.getElementById('productName').value;
+    const description = document.getElementById('description').value;
+    const price = parseFloat(document.getElementById('price').value);
+    const stockAvailability = document.getElementById('stockAvailability').value === 'true';
+    const imageUrl = document.getElementById('imageUrl').value || ''; // Optional
+
+    // Create product object
+    const productData = {
+        productName,
+        productDescription: description,
+        price,
+        stockAvailability,
+        imageUrl
+    };
+
+    // Validate inputs
+    if (!productName || !description || isNaN(price)) {
+        alert('Please fill in all required fields');
+        return;
+    }
+
+    // Send POST request to backend
+    fetch('http://localhost:8080/api/products/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorText => {
+                throw new Error(errorText || 'Failed to add product');
+            });
+        }
+        return response.json();
+    })
+    .then(newProduct => {
+        alert('Product added successfully!');
+        closeAddProductModal();
+        loadProducts(); // Reload the products list
+    })
+    .catch(error => {
+        console.error('Error adding product:', error);
+        alert(`Failed to add product: ${error.message}`);
+    });
+}
+
