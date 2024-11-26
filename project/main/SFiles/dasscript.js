@@ -300,3 +300,42 @@ function showAddProductModal() {
         }
     });
 }
+
+
+// Function to handle updating the order status
+function updateOrderStatus(orderId) {
+    const newStatus = prompt("Enter new order status:");
+
+    if (newStatus) {
+        fetch(`http://localhost:8080/order/update-status?orderId=${orderId}&status=${newStatus}`, {
+            method: "PUT",
+        })
+            .then(response => response.json())
+            .then(updatedOrder => {
+                alert("Order status updated successfully!");
+                loadOrders();  // Reload the orders after updating
+            })
+            .catch(error => {
+                console.error("Error updating order status:", error);
+            });
+    }
+}
+
+// Function to handle updating the delivery status
+function updateDeliveryStatus(deliveryId) {
+    const newStatus = prompt("Enter new delivery status:");
+
+    if (newStatus) {
+        fetch(`http://localhost:8080/api/deliveries/update-status?deliveryId=${deliveryId}&status=${newStatus}`, {
+            method: "PUT",
+        })
+            .then(response => response.json())
+            .then(updatedDelivery => {
+                alert("Delivery status updated successfully!");
+                loadDeliveries();  // Reload the deliveries after updating
+            })
+            .catch(error => {
+                console.error("Error updating delivery status:", error);
+            });
+    }
+}
