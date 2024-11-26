@@ -57,7 +57,7 @@ function loadCustomers() {
                     <td>${customer.firstName}</td>
                     <td>${customer.lastName}</td>
                     <td>${customer.email}</td>
-                    <td>${customer.username}</td>
+                    <td>${customer.userName}</td>
                 `;
                 customersTableBody.appendChild(row);
             });
