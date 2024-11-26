@@ -205,7 +205,7 @@ loadProducts();
 
 // Function to delete a product
 function deleteProduct(productId) {
-    fetch(`http://localhost:8080/products/${productId}`, {
+    fetch(`http://localhost:8080/api/products/delete?productId${productId}`, {
         method: 'DELETE',
     })
     .then(response => response.json())
