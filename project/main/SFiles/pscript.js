@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div>
                         <h3>${product.productName}</h3>
                         <p>${product.description}</p>
-                        <p>${product.productId}</p>
                         <p>Price: LKR ${product.price}</p>
                         <p>Stock: ${product.stockAvailability ? 'Available' : 'Out of stock'}</p>
                         <div class="button-container">

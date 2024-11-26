@@ -6,9 +6,15 @@ html, body{
 }
 
 body {
+  display: flex;
+  align-items: center;
   background-color: #f4ece4; 
   font-family: 'Rubik', sans-serif;
   color: #333;
+  background-image: url('https://img.freepik.com/premium-photo/spicy-spices-cinnamon-sticks-star-anise-dark-wooden-background_78677-3265.jpg?semt=ais_hybrid'); 
+  background-size: cover; 
+  background-position: center; 
+  
 }
 
 
@@ -29,6 +35,7 @@ body {
   font-weight: 700;
   color: #704214; 
   margin-bottom: 15px;
+  margin-top: 0%;
 }
 
 .description {
@@ -130,9 +137,10 @@ button.orderbtn:hover {
   align-items: center;
   background-color: #f9f9f9;
   padding: 40px;
-  margin: 40px 0;
+  max-width: 100%;
+  margin: 0;
   border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .feature-item {
