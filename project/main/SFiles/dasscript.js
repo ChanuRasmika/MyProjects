@@ -229,18 +229,46 @@ function deleteProduct(productId) {
 }
 
 // Function to update product price
-function updateProduct(productId, currentPrice) {
-    const newPrice = prompt(`Current Price: LKR ${currentPrice}\nEnter new price:`);
+function updateProduct(productId, currentPrice, currentStockAvailability) {
+    const modal = `
+    <div id="updateProductModal" class="modal show">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeUpdateProductModal()">&times;</span>
+            <h2>Update Product</h2>
+            <form id="updateProductForm">
+                <label for="newPrice">Price (Current: LKR ${currentPrice}):</label>
+                <input type="number" id="newPrice" name="newPrice" value="${currentPrice}" step="0.01" required><br><br>
 
-    if (newPrice && !isNaN(newPrice)) {
-        updateProductPrice(productId, parseFloat(newPrice));
-    } else {
-        alert("Invalid price. Please enter a valid number.");
-    }
+                <label for="stockAvailability">Stock Availability:</label>
+                <input type="checkbox" id="stockAvailability" name="stockAvailability" ${currentStockAvailability ? 'checked' : ''}><br><br>
+
+                <button type="submit">Update Product</button>
+            </form>
+        </div>
+    </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modal);
+
+    // Event listener for form submission
+    const updateProductForm = document.getElementById('updateProductForm');
+    updateProductForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const newPrice = document.getElementById('newPrice').value;
+        const stockAvailability = document.getElementById('stockAvailability').checked;
+
+        if (newPrice && !isNaN(newPrice)) {
+            updateProductDetails(productId, parseFloat(newPrice), stockAvailability);
+        } else {
+            alert("Invalid price. Please enter a valid number.");
+        }
+    });
 }
 
-function updateProductPrice(productId, newPrice) {
-    const url = `http://localhost:8080/api/products/update?productId=${productId}&price=${newPrice}`;
+function updateProductDetails(productId, newPrice, stockAvailability) {
+    const stockStatus = stockAvailability ? true : false;
+
+    const url = `http://localhost:8080/api/products/update?productId=${productId}&price=${newPrice}&stockAvailability=${stockAvailability}`;
 
     fetch(url, {
         method: 'PUT',
@@ -248,21 +276,27 @@ function updateProductPrice(productId, newPrice) {
     .then(response => {
         if (!response.ok) {
             return response.text().then(errorText => {
-                throw new Error(`Failed to update product price: ${errorText}`);
+                throw new Error(`Failed to update product: ${errorText}`);
             });
         }
         return response.text();
     })
     .then(data => {
-        alert("Product price updated successfully!"); 
+        alert("Product updated successfully!"); 
+        closeUpdateProductModal();
         loadProducts(); 
     })
     .catch(error => {
         console.error('Complete error details:', error);
-        alert('Error updating product price: ' + error.message);
+        alert('Error updating product: ' + error.message);
     });
 }
-
+function closeUpdateProductModal() {
+    const modal = document.getElementById('updateProductModal');
+    if (modal) {
+        modal.remove(); // Removes the modal from the DOM
+    }
+}
 function showAddProductModal() {
     console.log("showAddProductModal function called");
 
@@ -323,15 +357,21 @@ function showAddProductModal() {
                 },
                 body: JSON.stringify(productData),
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Product added successfully');
-                    closeAddProductModal();  // Close the modal after success
-                } else {
-                    // Improved error handling
-                    alert('Failed to add product. Please try again later.');
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                return response.json();
+            })
+            .then(createdProduct => {
+                // The response is now the created ProductDTO directly
+                alert('Product added successfully');
+                closeAddProductModal();
+                loadProducts();  // Reload products to show the new product
+            })
+            .catch(error => {
+                console.error('Error adding product:', error);
+                alert('Failed to add product. Please try again later.');
             })
             .catch(error => {
                 console.error('Error:', error);

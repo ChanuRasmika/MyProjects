@@ -237,6 +237,62 @@ body, html {
   overflow-x: hidden; /* Ensure no horizontal scroll */
 }
 
+/* Product Boxes Styling for Dashboard */
+#products .product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjusted spacing between product boxes */
+  justify-content: start; /* Align products to the start */
+}
+
+#products .product-grid .product-box {
+  width: 200px; /* Standard product box width */
+  height: 300px; /* Standard product box height */
+  margin: 0; /* Removed individual margins to use gap */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  background: #f4ece4;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+#products .product-grid .product-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+#products .product-grid .product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+#products .product-grid .product-info h3 {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+#products .product-grid .product-info p {
+  font-size: 12px;
+  margin: 3px 0;
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+  #products .product-grid {
+    gap: 15px; /* Slightly reduced spacing for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  #products .product-grid {
+    gap: 10px; /* Even smaller gap for very small screens */
+  }
+}
 .add-product-btn {
   background-color: #5A3E2B;
   color: white;
