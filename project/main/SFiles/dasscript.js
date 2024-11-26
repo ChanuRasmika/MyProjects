@@ -318,8 +318,9 @@ function showAddProductModal() {
                 <label for="stockAvailability">Product Stock Availability:</label>
                 <input type="checkbox" id="stockAvailability" name="stockAvailability"><br><br>
 
-                <label for="imageUrl">Product Image URL:</label>
-                <input type="url" id="imageUrl" name="imageUrl" required><br><br>
+                <label for="productImage">Product Image (Upload or URL):</label>
+                <input type="file" id="productImage" name="productImage" accept="image/*">
+                <input type="url" id="imageUrl" name="imageUrl" placeholder="Enter external image URL"><br><br>
 
                 <button type="submit">Add Product</button>
             </form>
@@ -337,8 +338,11 @@ function showAddProductModal() {
         const productDescription = document.getElementById('productDescription').value;
         const price = document.getElementById('price').value;
         const stockAvailability = document.getElementById('stockAvailability').checked;
-        const imageUrl = document.getElementById('imageUrl').value;
+        const imageUrlInput = document.getElementById('imageUrl').value;
+        const productImageFile = document.getElementById("productImage").files[0];  
 
+        const imageUrl = productImageFile ? `style/Images/${productImageFile.name}` : imageUrlInput || './images/default.jpg';
+        
         if (productName && productDescription && price && imageUrl) {
             // Create a product object
             const productData = {
