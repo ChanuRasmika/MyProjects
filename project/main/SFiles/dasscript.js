@@ -271,12 +271,19 @@ function showAddProductModal() {
             <form id="addProductForm">
                 <label for="productName">Product Name:</label>
                 <input type="text" id="productName" name="productName" required><br><br>
+
                 <label for="productDescription">Product Description:</label>
                 <textarea id="productDescription" name="productDescription" required></textarea><br><br>
-                <label for="productPrice">Product Price:</label>
-                <input type="number" id="productPrice" name="productPrice" required><br><br>
-                <label for="productStock">Product Stock Availability:</label>
-                <input type="checkbox" id="productStock" name="productStock"><br><br>
+
+                <label for="price">Product Price:</label>
+                <input type="number" id="price" name="price" required><br><br>
+
+                <label for="stockAvailability">Product Stock Availability:</label>
+                <input type="checkbox" id="stockAvailability" name="stockAvailability"><br><br>
+
+                <label for="imageUrl">Product Image URL:</label>
+                <input type="url" id="imageUrl" name="imageUrl" required><br><br>
+
                 <button type="submit">Add Product</button>
             </form>
         </div>
@@ -284,22 +291,63 @@ function showAddProductModal() {
     `;
     document.body.insertAdjacentHTML("beforeend", modal);
 
+    // Event listener for form submission
     const addProductForm = document.getElementById('addProductForm');
     addProductForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
         const productName = document.getElementById('productName').value;
         const productDescription = document.getElementById('productDescription').value;
-        const productPrice = document.getElementById('productPrice').value;
-        const productStock = document.getElementById('productStock').checked;
+        const price = document.getElementById('price').value;
+        const stockAvailability = document.getElementById('stockAvailability').checked;
+        const imageUrl = document.getElementById('imageUrl').value;
 
-        if (productName && productDescription && productPrice) {
-            addProduct(productName, productDescription, productPrice, productStock);
+        if (productName && productDescription && price && imageUrl) {
+            // Create a product object
+            const productData = {
+                productName: productName,
+                productDescription: productDescription,
+                price: price,
+                stockAvailability: stockAvailability,
+                imageUrl: imageUrl
+            };
+
+            // Send product data to the backend using Fetch API
+            fetch('http://localhost:8080/api/products/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(productData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Product added successfully');
+                    closeAddProductModal();  // Close the modal after success
+                } else {
+                    // Improved error handling
+                    alert('Failed to add product. Please try again later.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while adding the product. Please try again later.');
+            });
         } else {
             alert("Please fill out all required fields.");
         }
     });
 }
+
+// Function to close the modal
+function closeAddProductModal() {
+    const modal = document.getElementById('addProductModal');
+    if (modal) {
+        modal.remove(); // Removes the modal from the DOM
+    }
+}
+
 
 
 // Function to handle updating the order status
