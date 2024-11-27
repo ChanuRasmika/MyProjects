@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Your Cart</title>
+    <link rel="icon" href="style/Images/logo-color.png" type="image/png">
+    <link rel="stylesheet" href="style/cart.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral|Rubik">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="style/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="SFiles/cartscript.js" defer></script>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Shopping Cart</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Image</th>
-                    <th>Product Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Availability</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="cart-table-body">
-                <!-- Cart items will be dynamically added here -->
-            </tbody>
-        </table>
-        <p id="empty-cart-message" style="display: none;">Your cart is empty.</p>
+    <div class="navbar">
+        <div class="navbar-center">
+            <a href="index1.html"><i class="fa fa-fw fa-home"></i></a>
+            <a href="products.html"><i class="fa fa-fw fa-list"></i></a>
+            <a href="cart.html"><i class="fa fa-fw fa-shopping-cart"></i></a>
+        </div>
     </div>
-    <script src="SFiles/cartscript.js"></script>
+
+    <div class="container">
+        <h1 class="title">Your Cart</h1>
+        <div class="cart-grid">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <button id="clearCart">Clear Cart</button>
+        <button id="proceed">proceed</button>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 AWT Cinnamon Traders. All Rights Reserved.</p>
+        <p>123 Cinnamon Road, Batapola, Sri Lanka | Phone: +94 77 123 4567 | Email: info@awtcinnamon.com</p>
+    </div>
 </body>
 </html>

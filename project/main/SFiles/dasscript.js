@@ -17,12 +17,28 @@ document.addEventListener('DOMContentLoaded', function () {
     // Load customers
     loadCustomers();
 
+    // Load product count
+    loadProductCount();
+
+    loadOrdertCount();
+
+    loadCustomerCount(); 
+
     // Expose addDelivery globally (for button calls)
     window.addDelivery = addDelivery;
 
-    // Load product count
+  
+});
+
+
+function loadProductCount() {
     fetch('http://localhost:8080/api/products/count')
-        .then(response => response.json()) // Convert the response to JSON
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch product count');
+            }
+            return response.json();
+        })
         .then(data => {
             // If backend returns a plain number:
             if (typeof data === 'number') {
@@ -34,7 +50,54 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         .catch(error => console.error('Error fetching product count:', error));
-});
+}
+
+function loadOrdertCount() {
+    fetch('http://localhost:8080/order/count')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch product count');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // If backend returns a plain number:
+            if (typeof data === 'number') {
+                document.getElementById('order-count').textContent = data;
+            }
+            // If backend wraps it as { count: <number> }:
+            else if (data.count !== undefined) {
+                document.getElementById('order-count').textContent = data.count;
+            }
+        })
+        .catch(error => console.error('Error fetching product count:', error));
+}
+
+
+function loadCustomerCount() {
+    fetch('http://localhost:8080/customer/count')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch product count');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // If backend returns a plain number:
+            if (typeof data === 'number') {
+                document.getElementById('user-count').textContent = data;
+            }
+            // If backend wraps it as { count: <number> }:
+            else if (data.count !== undefined) {
+                document.getElementById('user-count').textContent = data.count;
+            }
+        })
+        .catch(error => console.error('Error fetching product count:', error));
+}
+
+
+
+
 // Function to fetch and display customers
 function loadCustomers() {
     fetch("http://localhost:8080/customer/all")  // Replace with your backend API endpoint
@@ -478,3 +541,6 @@ function updateDeliveryStatus(deliveryId) {
             });
     }
 }
+
+
+

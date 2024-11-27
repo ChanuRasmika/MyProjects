@@ -1,61 +1,64 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Fetch cart data from localStorage
+    const cartGrid = document.querySelector('.cart-grid');
+    const clearCartButton = document.getElementById('clearCart');
+    const proceedButton = document.getElementById('proceed');
+
+    // Load cart from localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Reference to the cart table body and empty cart message
-    const cartTableBody = document.querySelector('#cart-table-body');
-    const emptyCartMessage = document.querySelector('#empty-cart-message');
-
-    // Function to render the cart
+    // Function to render cart items
     const renderCart = () => {
-        // Clear previous rows
-        cartTableBody.innerHTML = '';
+        cartGrid.innerHTML = ''; // Clear current grid
 
         if (cart.length === 0) {
-            emptyCartMessage.style.display = 'block';
+            cartGrid.innerHTML = '<p>Your cart is empty.</p>';
             return;
         }
 
-        emptyCartMessage.style.display = 'none';
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
 
-        // Populate the table with cart items
-        cart.forEach((product, index) => {
-            if (product && product.productName) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${product.productId}</td>
-                    <td><img src="${product.imageUrl}" alt="${product.productName}" style="width: 50px; height: 50px;"></td>
-                    <td>${product.productName}</td>
-                    <td>${product.description}</td>
-                    <td>LKR ${product.price}</td>
-                    <td>${product.stockAvailability ? 'In Stock' : 'Out of Stock'}</td>
-                    <td>
-                        <button class="remove-btn" data-index="${index}" style="color: white; background-color: red; border: none; padding: 5px 10px; cursor: pointer;">
-                            Remove
-                        </button>
-                    </td>
-                `;
-                cartTableBody.appendChild(row);
-            }
+            cartItem.innerHTML = `
+                <div class="cart-item-image">
+                    <img src="${item.imageUrl}" alt="${item.productName}">
+                </div>
+                <div class="cart-item-details">
+                    <h3>${item.productName}</h3>
+                    <p>${item.description}</p>
+                    <p><strong>Price:</strong> LKR ${item.price}</p>
+                    <button class="remove-from-cart" data-id="${item.productId}">Remove</button>
+                </div>
+            `;
+
+            cartGrid.appendChild(cartItem);
         });
     };
 
-    // Remove product from cart
-    cartTableBody.addEventListener('click', (event) => {
-        if (event.target.classList.contains('remove-btn')) {
-            const index = event.target.getAttribute('data-index');
-            
-            // Remove item from cart array
-            cart.splice(index, 1);
-            
-            // Update localStorage
+    // Initial render
+    renderCart();
+
+    // Event listener to remove an item from the cart
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-from-cart')) {
+            const productId = event.target.getAttribute('data-id');
+            cart = cart.filter(item => item.productId !== parseInt(productId, 10));
             localStorage.setItem('cart', JSON.stringify(cart));
-            
-            // Re-render the cart
             renderCart();
         }
     });
 
-    // Initial render
-    renderCart();
+    // Clear entire cart
+    clearCartButton.addEventListener('click', () => {
+        localStorage.removeItem('cart');
+        cart = [];
+        renderCart();
+        alert('Cart cleared!');
+    });
+
+    // Proceed to checkout
+    proceedButton.addEventListener('click', () => {
+        localStorage.setItem('checkoutCart', JSON.stringify(cart));
+        window.location.href = 'checkout.html';
+    });
 });

@@ -4,15 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             const productGrid = document.querySelector('.product-grid');
-            
+
             // Clear the grid
             productGrid.innerHTML = '';
-            
+
             // Add each product to the grid
             data.forEach(product => {
                 const productElement = document.createElement('div');
                 productElement.classList.add('product-box');
-                
+
                 productElement.innerHTML = `
                     <img src="${product.imageUrl}" alt="${product.productName}">
                     <div>
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 `;
-                
+
                 productGrid.appendChild(productElement);
             });
         })
@@ -35,34 +35,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const productGrid = document.querySelector('.product-grid');
             productGrid.innerHTML = '<p>Failed to load products. Please try again later.</p>';
         });
+});
 
-    // Add to cart event listener
-    document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('add-to-cart')) {
-            const productId = event.target.getAttribute('data-id');
-            
-            // Fetch product by ID
-            fetch(`http://localhost:8080/api/products/get?id=${productId}`)
-                .then(response => response.json())
-                .then(product => {
-                    // Get existing cart from localStorage
-                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                    
-                    // Check if product already exists in the cart
-                    const isProductInCart = cart.some(item => item.productId === product.productId);
-                    
-                    if (!isProductInCart) {
-                        cart.push(product);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        alert(`${product.productName} has been added to your cart.`);
-                    } else {
-                        alert(`${product.productName} is already in your cart.`);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Failed to add product to cart.');
-                });
-        }
-    });
+// Use event delegation for dynamically added elements
+document.addEventListener('click', (event) => {
+    const addToCartButton = event.target.closest('.add-to-cart');
+    if (addToCartButton) {
+        const productId = addToCartButton.getAttribute('data-id');
+
+        // Fetch product by ID
+        fetch(`http://localhost:8080/api/products/get?productId=${productId}`)
+            .then(response => response.json())
+            .then(product => {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const isProductInCart = cart.some(item => item.productId === product.productId);
+
+                if (!isProductInCart) {
+                    cart.push(product);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    alert(`${product.productName} has been added to your cart.`);
+                } else {
+                    alert(`${product.productName} is already in your cart.`);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to add product to cart.');
+            });
+    }
 });
